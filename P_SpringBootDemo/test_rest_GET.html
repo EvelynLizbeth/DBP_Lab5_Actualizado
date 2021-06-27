@@ -1,0 +1,67 @@
+<!--
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $.ajax({
+        url: "http://localhost:8080/ItemRestService/FindAll", 
+        success: function(result){
+            console.log(result);
+      $("#div1").html(result);
+    }});
+  }); 
+});
+</script>
+</head>
+<body>
+
+<div id="div1"><h2>Let jQuery AJAX Change This Text</h2></div>
+
+<button>Get External Content</button>
+
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $.ajax({
+  type:"GET",
+	url: "http://localhost:8080/ItemRestService/FindAll", 
+	success: function(result){
+        console.log(result);
+	    var obj = result,  // get entry object (array) from JSON data
+             ul = $("<ul>");                    // create a new ul element
+
+        // iterate over the array and build the list
+        for (var i = 0, l = obj.length; i < l; ++i) {
+            ul.append("<li> " + obj[i].id + " --- " + obj[i].description + "</li>");
+        }
+
+        $("#div2").append(ul);    // add the list to the DOM
+	    //$("#div1").html(result); 
+
+    }});
+
+  });
+
+});
+
+</script>
+</head>
+<body>
+<div id="div1"><h2>Let jQuery AJAX Change This Text</h2></div>
+<div id="div2"> Create Dynamic HTML UL LIST</div>
+<button>Get External Content</button>
+</body>
+
+</html>
